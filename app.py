@@ -31,6 +31,16 @@ except Exception:
 
 genai.configure(api_key=api_key)
 
+# --- CÓDIGO DE DIAGNÓSTICO (APAGAR DEPOIS) ---
+st.write("🔍 A investigar modelos disponíveis...")
+try:
+    for m in genai.list_models():
+        if 'generateContent' in m.supported_generation_methods:
+            st.write(f"- {m.name}")
+except Exception as e:
+    st.error(f"Erro ao listar modelos: {e}")
+# ---------------------------------------------
+
 # --- 4. O CÉREBRO (PROMPT JURÍDICO ATUALIZADO) ---
 SYSTEM_PROMPT = """
 Tu és o "AtaPro", um assistente profissional de administração de condomínios em Portugal.
