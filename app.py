@@ -31,16 +31,6 @@ except Exception:
 
 genai.configure(api_key=api_key)
 
-# --- CÓDIGO DE DIAGNÓSTICO (APAGAR DEPOIS) ---
-st.write("🔍 A investigar modelos disponíveis...")
-try:
-    for m in genai.list_models():
-        if 'generateContent' in m.supported_generation_methods:
-            st.write(f"- {m.name}")
-except Exception as e:
-    st.error(f"Erro ao listar modelos: {e}")
-# ---------------------------------------------
-
 # --- 4. O CÉREBRO (PROMPT JURÍDICO ATUALIZADO) ---
 SYSTEM_PROMPT = """
 Tu és o "AtaPro", um assistente profissional de administração de condomínios em Portugal.
@@ -129,7 +119,7 @@ if uploaded_file is not None and termos:
                     myfile = genai.get_file(myfile.name)
 
                 # 3. Gerar Texto (Modelo Flash para rapidez)
-                model = genai.GenerativeModel("gemini-1.5-flash")
+                model = genai.GenerativeModel("models/gemini-flash-latest")
                 response = model.generate_content([SYSTEM_PROMPT, myfile])
                 
                 # 4. Guardar no Session State
