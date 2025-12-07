@@ -119,7 +119,7 @@ if uploaded_file is not None and termos:
                     myfile = genai.get_file(myfile.name)
 
                 # 3. Gerar Texto (Modelo Flash para rapidez)
-                model = genai.GenerativeModel("gemini-1.5-flash")
+                model = genai.GenerativeModel("gemini-1.5-flash-latest")
                 response = model.generate_content([SYSTEM_PROMPT, myfile])
                 
                 # 4. Guardar no Session State
